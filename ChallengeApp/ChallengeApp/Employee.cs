@@ -3,6 +3,7 @@
     public class Employee
     {
         private List<int> grades = new List<int>();
+
         public Employee(string name, string surname, int age)
         {
             this.Name = name;
@@ -24,6 +25,11 @@
         public void AddGrade(int number)
         {
             this.grades.Add(number);
+        }
+
+        public void SubtractGrade(int number)
+        {
+            this.grades.Add(-number);
         }
     }
 }
