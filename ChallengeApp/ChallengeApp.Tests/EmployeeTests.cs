@@ -1,55 +1,72 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 namespace ChallengeApp.Tests
 {
-    public class Tests
+    public class EmployeeTests
     {
         [Test]
-        public void WhenEmployeeGetsGrades_ShouldReturnCorrectPositiveResult()
+        public void WhenGetStatisticsCalled_ShouldReturnCorrectMaxGrade()
         {
             //arrange
-            var user = new Employee("Marek", "Kolano", 24);
-            user.AddGrade(10);
-            user.AddGrade(9);
+            var employee = new Employee("Paweł", "Kuczek");
+            employee.AddGrade(3);
+            employee.AddGrade(4);
+            employee.AddGrade(5);
 
             //act
-            var result = user.Result;
+            var statistics = employee.GetStatistics();
 
             //assert
-            Assert.AreEqual(19, result);
+            Assert.AreEqual(5, statistics.Max);
+
+        }
+        [Test]
+        public void WhenGetStatisticsCalled_ShouldReturnCorrectMinGrade()
+        {
+            //arrange
+            var employee = new Employee("Paweł", "Kuczek");
+            employee.AddGrade(3);
+            employee.AddGrade(4);
+            employee.AddGrade(5);
+
+            //act
+            var statistics = employee.GetStatistics();
+
+            //assert
+            Assert.AreEqual(3, statistics.Min);
 
         }
 
         [Test]
-        public void WhenEmployeeLosesGrades_ShouldReturnCorrectNegativeResult()
+        public void WhenGetStatisticsCalled_ShouldReturnCorrectAverageGrade()
         {
             //arrange
-            var user = new Employee("Marek", "Kolano", 24);
-            user.SubtractGrade(7);
-            user.SubtractGrade(6);
+            var employee = new Employee("Paweł", "Kuczek");
+            employee.AddGrade(3);
+            employee.AddGrade(4);
+            employee.AddGrade(5);
 
             //act
-            var result = user.Result;
+            var statistics = employee.GetStatistics();
 
             //assert
-            Assert.AreEqual(-13, result);
+            Assert.AreEqual(Math.Round(4.00, 2), Math.Round(statistics.Average, 2));
 
         }
+
         [Test]
-        public void WhenEmployeeGetsAndLosesGrades_ShouldReturnCorrectResult()
+        public void WhenGetStatisticsCalled_ShouldReturnCorrectSumOfGrades()
         {
             //arrange
-            var user = new Employee("Marek", "Kolano", 24);
-            user.AddGrade(5);
-            user.AddGrade(8);
-            user.SubtractGrade(3);
-            user.AddGrade(6);
-            user.SubtractGrade(4);
+            var employee = new Employee("Paweł", "Kuczek");
+            employee.AddGrade(3);
+            employee.AddGrade(4);
+            employee.AddGrade(5);
 
             //act
-            var result = user.Result;
+            var statistics = employee.GetStatistics();
 
             //assert
-            Assert.AreEqual(12, result);
+            Assert.AreEqual(12, statistics.SumOfGrades);
 
         }
     }
