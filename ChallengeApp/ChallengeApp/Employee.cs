@@ -2,21 +2,17 @@
 
 namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
-        private const char sex = 'M';
 
         private List<float> grades = new List<float>();
 
-        public Employee(string name, string surname)
+
+        public Employee(string name, string surname, char sex)
+            : base(name, surname, sex)
         {
-            this.Name = name;
-            this.Surname = surname;
 
         }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
-
 
         public void AddGrade(float grade)
         {
@@ -54,7 +50,7 @@ namespace ChallengeApp
 
         public void AddGrade(char grade)
         {
-        switch (grade)
+            switch (grade)
             {
                 case 'A':
                 case 'a':
@@ -99,7 +95,8 @@ namespace ChallengeApp
 
             statistics.Average = statistics.Average /= this.grades.Count;
 
-            switch(statistics.Average) {
+            switch (statistics.Average)
+            {
                 case var a when a >= 80:
                     statistics.AverageLetter = 'A';
                     break;
@@ -117,7 +114,7 @@ namespace ChallengeApp
                     break;
 
             }
-            
+
             return statistics;
 
         }
