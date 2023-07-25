@@ -1,30 +1,13 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
-    public class Employee :IEmployee
+    public class EmployeeInMemory : EmployeeBase
     {
-
         private List<float> grades = new List<float>();
-
-
-        //public Employee(string name, string surname, char sex)
-        //    : base(name, surname, sex)
-        //{
-
-        //}
-
-        public Employee(string name, string surname, char sex) {
-            this.Name = name;
-            this.Surname = surname;
-            this.Sex = sex;
+        public EmployeeInMemory(string name, string surname, char sex) : base(name, surname, sex)
+        {
         }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
 
-        public char Sex { get; private set; }
-
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
 
             if (grade >= 0 && grade <= 100)
@@ -38,7 +21,7 @@ namespace ChallengeApp
 
         }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
         {
             if (float.TryParse(grade, out float result))
             {
@@ -51,7 +34,7 @@ namespace ChallengeApp
 
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             float gradeInFloat = (float)grade;
             this.AddGrade(gradeInFloat);
@@ -59,14 +42,14 @@ namespace ChallengeApp
         }
 
 
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             float gradeInFloat = (float)grade;
             this.AddGrade(gradeInFloat);
 
         }
 
-        public void AddGrade(char grade)
+        public override void AddGrade(char grade)
         {
             switch (grade)
             {
@@ -96,7 +79,7 @@ namespace ChallengeApp
 
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Average = 0;
@@ -138,4 +121,3 @@ namespace ChallengeApp
         }
     }
 }
-

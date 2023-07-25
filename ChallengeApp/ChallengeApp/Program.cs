@@ -1,34 +1,32 @@
 ﻿using ChallengeApp;
 
-Console.WriteLine("Witamy w Programie XYZ do oceny zarządu");
+Console.WriteLine("Witamy w Programie XYZ do oceny pracowników");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 
-var supervisor = new Supervisor("Jan", "Kowalski", 'M');
-
-while (true)
+var employee = new EmployeeInFile("Jan", "Kowalski", 'M');
+try
 {
-    Console.WriteLine("Podaj kolejną ocenę dyrektora: ");
-    var input = Console.ReadLine();
-    {
-        if (input == "q" || input == "Q")
-            break;
-    }
+    
+    employee.AddGrade(100);
+    employee.AddGrade("80");
+    employee.AddGrade(99.5);
+    employee.AddGrade('C');
 
-    try
-    {
-        supervisor.AddGrade(input);
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine($"Exception catched: {e.Message}");
-    }
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message.ToString());
 }
 
-
-var statistics = supervisor.GetStatistics();
-Console.WriteLine($"Statystyki dyrektora: {supervisor.Name} {supervisor.Surname}");
+var statistics = employee.GetStatistics();
+Console.WriteLine($"Statystyki pracownika: {employee.Name} {employee.Surname}");
 Console.WriteLine($"AVG: {statistics.Average}");
 Console.WriteLine($"MIN: {statistics.Min}");
 Console.WriteLine($"MAX: {statistics.Max}");
+Console.WriteLine($"SUM OF GRADES: {statistics.SumOfGrades}");
+Console.WriteLine($"AVERAGE LETTER: {statistics.AverageLetter}");
+
+
+
 
