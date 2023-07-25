@@ -28,33 +28,32 @@
 
         public override void AddGrade(char grade)
         {
-            using (var writer = File.AppendText(fileName))
-            {
+           
                 switch (grade)
                 {
                     case 'A':
                     case 'a':
-                        writer.WriteLine(100);
+                        this.AddGrade(100);
                         base.EventAddGrade();
                         break;
                     case 'B':
                     case 'b':
-                        writer.WriteLine(80);
+                        this.AddGrade(80);
                         base.EventAddGrade();
                         break;
                     case 'C':
                     case 'c':
-                        writer.WriteLine(60);
+                        this.AddGrade(60);
                         base.EventAddGrade();
                         break;
                     case 'D':
                     case 'd':
-                        writer.WriteLine(40);
+                        this.AddGrade(40);
                         base.EventAddGrade();
                         break;
                     case 'E':
                     case 'e':
-                        writer.WriteLine(20);
+                        this.AddGrade(20);
                         base.EventAddGrade();
                         break;
                     default:
@@ -62,7 +61,7 @@
                 }
             }
 
-        }
+        
 
         public override void AddGrade(string grade)
         {
