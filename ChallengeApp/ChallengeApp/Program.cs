@@ -5,9 +5,11 @@ Console.WriteLine("===========================================");
 Console.WriteLine();
 
 var employee = new EmployeeInFile("Jan", "Kowalski", 'M');
+employee.GradeAdded += EmployeeGradeAdded;
+
 try
 {
-    
+
     employee.AddGrade(100);
     employee.AddGrade("80");
     employee.AddGrade(99.5);
@@ -28,5 +30,8 @@ Console.WriteLine($"SUM OF GRADES: {statistics.SumOfGrades}");
 Console.WriteLine($"AVERAGE LETTER: {statistics.AverageLetter}");
 
 
-
+void EmployeeGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano nową ocenę");
+}
 

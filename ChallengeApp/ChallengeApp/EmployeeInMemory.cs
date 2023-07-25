@@ -5,7 +5,9 @@
         private List<float> grades = new List<float>();
         public EmployeeInMemory(string name, string surname, char sex) : base(name, surname, sex)
         {
+           
         }
+
 
         public override void AddGrade(float grade)
         {
@@ -13,10 +15,46 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                base.EventAddGrade();
             }
             else
             {
                 throw new Exception("Invalid grade value");
+            }
+
+        }
+
+        public override void AddGrade(char grade)
+        {
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.grades.Add(100);
+                    base.EventAddGrade();
+                    break;
+                case 'B':
+                case 'b':
+                    this.grades.Add(80);
+                    base.EventAddGrade();
+                    break;
+                case 'C':
+                case 'c':
+                    this.grades.Add(60);
+                    base.EventAddGrade();
+                    break;
+                case 'D':
+                case 'd':
+                    this.grades.Add(40);
+                    base.EventAddGrade();
+                    break;
+                case 'E':
+                case 'e':
+                    this.grades.Add(20);
+                    base.EventAddGrade();
+                    break;
+                default:
+                    throw new Exception("Wrong letter");
             }
 
         }
@@ -46,36 +84,6 @@
         {
             float gradeInFloat = (float)grade;
             this.AddGrade(gradeInFloat);
-
-        }
-
-        public override void AddGrade(char grade)
-        {
-            switch (grade)
-            {
-                case 'A':
-                case 'a':
-                    this.grades.Add(100);
-                    break;
-                case 'B':
-                case 'b':
-                    this.grades.Add(80);
-                    break;
-                case 'C':
-                case 'c':
-                    this.grades.Add(60);
-                    break;
-                case 'D':
-                case 'd':
-                    this.grades.Add(40);
-                    break;
-                case 'E':
-                case 'e':
-                    this.grades.Add(20);
-                    break;
-                default:
-                    throw new Exception("Wrong letter");
-            }
 
         }
 

@@ -15,12 +15,51 @@
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
+                    base.EventAddGrade();
                 }
             }
             else
             {
                 throw new Exception("Invalid grade value");
 
+            }
+
+        }
+
+        public override void AddGrade(char grade)
+        {
+            using (var writer = File.AppendText(fileName))
+            {
+                switch (grade)
+                {
+                    case 'A':
+                    case 'a':
+                        writer.WriteLine(100);
+                        base.EventAddGrade();
+                        break;
+                    case 'B':
+                    case 'b':
+                        writer.WriteLine(80);
+                        base.EventAddGrade();
+                        break;
+                    case 'C':
+                    case 'c':
+                        writer.WriteLine(60);
+                        base.EventAddGrade();
+                        break;
+                    case 'D':
+                    case 'd':
+                        writer.WriteLine(40);
+                        base.EventAddGrade();
+                        break;
+                    case 'E':
+                    case 'e':
+                        writer.WriteLine(20);
+                        base.EventAddGrade();
+                        break;
+                    default:
+                        throw new Exception("Wrong letter");
+                }
             }
 
         }
@@ -49,38 +88,6 @@
             this.AddGrade(gradeInFloat);
         }
 
-        public override void AddGrade(char grade)
-        {
-            using (var writer = File.AppendText(fileName))
-            {
-                switch (grade)
-                {
-                    case 'A':
-                    case 'a':
-                        writer.WriteLine(100);
-                        break;
-                    case 'B':
-                    case 'b':
-                        writer.WriteLine(80);
-                        break;
-                    case 'C':
-                    case 'c':
-                        writer.WriteLine(60);
-                        break;
-                    case 'D':
-                    case 'd':
-                        writer.WriteLine(40);
-                        break;
-                    case 'E':
-                    case 'e':
-                        writer.WriteLine(20);
-                        break;
-                    default:
-                        throw new Exception("Wrong letter");
-                }
-            }
-
-        }
 
         public override Statistics GetStatistics()
 
