@@ -1,14 +1,14 @@
 ﻿using ChallengeApp;
 
-Console.WriteLine("Witamy w Programie XYZ do oceny Pracowników");
+Console.WriteLine("Witamy w Programie XYZ do oceny zarządu");
 Console.WriteLine("===========================================");
 Console.WriteLine();
 
-var employee = new Employee("Paweł", "Kuczek", 'M');
+var supervisor = new Supervisor("Jan", "Kowalski", 'M');
 
 while (true)
 {
-    Console.WriteLine("Podaj kolejną ocenę pracownika: ");
+    Console.WriteLine("Podaj kolejną ocenę dyrektora: ");
     var input = Console.ReadLine();
     {
         if (input == "q" || input == "Q")
@@ -17,7 +17,7 @@ while (true)
 
     try
     {
-        employee.AddGrade(input);
+        supervisor.AddGrade(input);
     }
     catch (Exception e)
     {
@@ -26,11 +26,9 @@ while (true)
 }
 
 
-var statistics = employee.GetStatistics();
+var statistics = supervisor.GetStatistics();
+Console.WriteLine($"Statystyki dyrektora: {supervisor.Name} {supervisor.Surname}");
 Console.WriteLine($"AVG: {statistics.Average}");
 Console.WriteLine($"MIN: {statistics.Min}");
 Console.WriteLine($"MAX: {statistics.Max}");
-Console.WriteLine(employee.Name);
-Console.WriteLine(employee.Surname);
-Console.WriteLine(employee.Sex);
 
