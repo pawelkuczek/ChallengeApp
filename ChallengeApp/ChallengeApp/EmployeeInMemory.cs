@@ -31,27 +31,22 @@
                 case 'A':
                 case 'a':
                     this.AddGrade(100);
-                    base.EventAddGrade();
                     break;
                 case 'B':
                 case 'b':
                     this.AddGrade(80);
-                    base.EventAddGrade();
                     break;
                 case 'C':
                 case 'c':
                     this.AddGrade(60);
-                    base.EventAddGrade();
                     break;
                 case 'D':
                 case 'd':
                     this.AddGrade(40);
-                    base.EventAddGrade();
                     break;
                 case 'E':
                 case 'e':
                     this.AddGrade(20);
-                    base.EventAddGrade();
                     break;
                 default:
                     throw new Exception("Wrong letter");
