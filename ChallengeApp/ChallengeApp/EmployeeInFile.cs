@@ -4,6 +4,8 @@
     {
 
         private const string fileName = "grades.txt";
+
+        public override event GradeAddedDelegate GradeAdded;
         public EmployeeInFile(string name, string surname, char sex) : base(name, surname, sex)
         {
         }
@@ -15,7 +17,10 @@
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
-                    base.EventAddGrade();
+                    if (GradeAdded != null)
+                    {
+                        GradeAdded(this, new EventArgs());
+                    }
                 }
             }
             else
@@ -28,35 +33,35 @@
 
         public override void AddGrade(char grade)
         {
-           
-                switch (grade)
-                {
-                    case 'A':
-                    case 'a':
-                        this.AddGrade(100);
-                        break;
-                    case 'B':
-                    case 'b':
-                        this.AddGrade(80);
-                        break;
-                    case 'C':
-                    case 'c':
-                        this.AddGrade(60);
-                        break;
-                    case 'D':
-                    case 'd':
-                        this.AddGrade(40);
-                        break;
-                    case 'E':
-                    case 'e':
-                        this.AddGrade(20);
-                        break;
-                    default:
-                        throw new Exception("Wrong letter");
-                }
-            }
 
-        
+            switch (grade)
+            {
+                case 'A':
+                case 'a':
+                    this.AddGrade(100);
+                    break;
+                case 'B':
+                case 'b':
+                    this.AddGrade(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.AddGrade(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.AddGrade(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.AddGrade(20);
+                    break;
+                default:
+                    throw new Exception("Wrong letter");
+            }
+        }
+
+
 
         public override void AddGrade(string grade)
         {
@@ -86,8 +91,7 @@
         public override Statistics GetStatistics()
 
         {
-
-            List<float> grades = new List<float>();
+            var statistics = new Statistics();
 
             if (File.Exists(fileName))
             {
@@ -97,47 +101,11 @@
                     while (line != null)
                     {
                         var number = float.Parse(line);
-                        grades.Add(number);
+                        statistics.AddGrade(number);
                         line = reader.ReadLine();
                     }
                 }
             }
-
-            var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            statistics.SumOfGrades = grades.Sum();
-
-            foreach (var grade in grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-
-            statistics.Average = statistics.Average /= grades.Count;
-
-            switch (statistics.Average)
-            {
-                case var a when a >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case var a when a >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case var a when a >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case var a when a >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
-
-            }
-
             return statistics;
         }
     }

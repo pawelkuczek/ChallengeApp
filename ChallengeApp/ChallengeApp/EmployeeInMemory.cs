@@ -3,9 +3,11 @@
     public class EmployeeInMemory : EmployeeBase
     {
         private List<float> grades = new List<float>();
+
+        public override event GradeAddedDelegate GradeAdded;
         public EmployeeInMemory(string name, string surname, char sex) : base(name, surname, sex)
         {
-           
+
         }
 
 
@@ -15,7 +17,10 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
-                base.EventAddGrade();
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
@@ -85,38 +90,10 @@
         public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
-            statistics.Average = 0;
-            statistics.Max = float.MinValue;
-            statistics.Min = float.MaxValue;
-            statistics.SumOfGrades = this.grades.Sum();
 
             foreach (var grade in this.grades)
             {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-
-            statistics.Average = statistics.Average /= this.grades.Count;
-
-            switch (statistics.Average)
-            {
-                case var a when a >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case var a when a >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case var a when a >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case var a when a >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
-
+                statistics.AddGrade(grade);
             }
 
             return statistics;

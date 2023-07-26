@@ -4,7 +4,7 @@
     {
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
-        public event GradeAddedDelegate GradeAdded;
+        public abstract event GradeAddedDelegate GradeAdded;
         public EmployeeBase(string name, string surname, char sex)
         {
             this.Name = name;
@@ -33,14 +33,5 @@
 
 
         public abstract Statistics GetStatistics();
-
-        public void EventAddGrade()
-        {
-            if (GradeAdded != null)
-            {
-                GradeAdded(this, new EventArgs());
-            }
-        }
-
     }
 }
